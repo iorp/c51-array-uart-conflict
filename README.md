@@ -49,7 +49,7 @@ void main() {
 ```
 
 
-he issue I'm encountering is that when an array is declared (unsigned long myArrayDeclaration[4] = { 0x00FFF789, };), the UART transmission sends the first character twice, resulting in "xxyz" instead of the expected "xyz." If I remove the array declaration, the transmission works correctly.
+The issue I'm encountering is that when an array is declared (unsigned long myArrayDeclaration[4] = { 0x00FFF789, };), the UART transmission sends the first character twice, resulting in "xxyz" instead of the expected "xyz." If I remove the array declaration, the transmission works correctly.
 
 I'm using a Keil C51 environment with the uVision 4 IDE and simulating the code in Proteus. The microcontroller is an 89C52 chip.
 
