@@ -1,0 +1,72 @@
+C51 COMPILER V9.52.0.0   MAIN                                                              02/06/2024 23:16:23 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c OPTIMIZE(0,SPEED) BROWSE ORDER NOAREGS DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          #include <intrins.h>
+   3           
+   4            // When an array is declared then uart will send the first uart character twice,
+   5            unsigned long myArrayDeclaration[4] = {   0x00FFF789,  };
+   6            // If the line above exists , UART will wrongly send "xxyz", instead of "xyz", nonsense. 
+   7          
+   8           
+   9          sbit UART_RXD = P3^0;  // RXD pin
+  10          sbit UART_TXD = P3^1;  // TXD pin
+  11          
+  12          void UART_Init() { 
+  13   1          TMOD |= 0x20;    // Timer 1, Mode 2 (8-bit auto-reload)  
+  14   1          // TH1 = 0xFD;      // Set baud rate for 9600 bps at 11.0592 MHz crystal
+  15   1          TH1 = 0xFA;       // Set baud rate for 9600 bps at 22.1184 MHz crystal
+  16   1          TL1 = TH1;
+  17   1       
+  18   1          TR1 = 1;         // Start Timer 1
+  19   1      
+  20   1          SCON = 0x50;     // Set serial mode 1 (8-bit UART)
+  21   1          EA = 1;          // Enable global interrupts
+  22   1          ES = 1;          // Enable serial interrupt
+  23   1      }
+  24          
+  25          
+  26          
+  27          void UART_TxString(const char *string) {
+  28   1          while (*string != '\0') {
+  29   2              SBUF = *string;  // Send character
+  30   2              while (!TI);     // Wait for transmit complete
+  31   2              TI = 0;          // Clear transmit interrupt flag
+  32   2              string++;        // Move to the next character
+  33   2             //_nop_();        // This makes no difference
+  34   2          }
+  35   1      }
+  36          void main() { 
+  37   1        
+  38   1        UART_Init();           // Init uart
+  39   1         // _nop_();           // This makes no difference
+  40   1         UART_TxString("xyz"); // Send 3 chars
+  41   1         
+  42   1          while(1) {
+  43   2         
+  44   2          }
+  45   1      }
+  46           
+  47            
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     84    ----
+   CONSTANT SIZE    =      4    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     19    ----
+C51 COMPILER V9.52.0.0   MAIN                                                              02/06/2024 23:16:23 PAGE 2   
+
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,163 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/06/2024  23:16:23  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, main.obj TO firmware RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+
+
+LINK MAP OF MODULE:  firmware (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0010H     UNIT         ?DT?MAIN
+            DATA    0018H     0003H     UNIT         ?DT?_UART_TXSTRING?MAIN
+            IDATA   001BH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     008CH     UNIT         ?C_C51STARTUP
+            CODE    008FH     0032H     UNIT         ?PR?_UART_TXSTRING?MAIN
+            CODE    00C1H     0019H     UNIT         ?C?LIB_CODE
+            CODE    00DAH     0013H     UNIT         ?PR?UART_INIT?MAIN
+            CODE    00EDH     0013H     UNIT         ?C_INITSEG
+            CODE    0100H     000FH     UNIT         ?PR?MAIN?MAIN
+            CODE    010FH     0004H     UNIT         ?CO?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   firmware (?C_STARTUP)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?UART_INIT?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_UART_TXSTRING?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  firmware (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/06/2024  23:16:23  PAGE 2
+
+
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:0003H         SEGMENT       ?C_C51STARTUP
+  I:001BH         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0006H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0003H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0003H         LINE#         133
+  C:0005H         LINE#         134
+  C:0006H         LINE#         135
+  C:0007H         LINE#         136
+  C:0009H         LINE#         185
+  C:000CH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00D0H         PUBLIC        PSW
+  D:0088H         PUBLIC        TCON
+  D:0089H         PUBLIC        TMOD
+  D:008BH         PUBLIC        TL1
+  D:008DH         PUBLIC        TH1
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0099H         PUBLIC        SBUF
+  D:00C8H         PUBLIC        T2CON
+  B:0088H.6       PUBLIC        TR1
+  B:00A8H.7       PUBLIC        EA
+  B:00A8H.4       PUBLIC        ES
+  B:0098H.1       PUBLIC        TI
+  D:0008H         PUBLIC        myArrayDeclaration
+  C:00DAH         PUBLIC        UART_Init
+  C:008FH         PUBLIC        _UART_TxString
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/06/2024  23:16:23  PAGE 3
+
+
+  C:0100H         PUBLIC        main
+  -------         PROC          UART_INIT
+  C:00DAH         LINE#         12
+  C:00DAH         LINE#         13
+  C:00DDH         LINE#         15
+  C:00E0H         LINE#         16
+  C:00E3H         LINE#         18
+  C:00E5H         LINE#         20
+  C:00E8H         LINE#         21
+  C:00EAH         LINE#         22
+  C:00ECH         LINE#         23
+  -------         ENDPROC       UART_INIT
+  -------         PROC          _UART_TXSTRING
+  D:0018H         SYMBOL        string
+  C:008FH         LINE#         27
+  C:0095H         LINE#         28
+  C:00A2H         LINE#         29
+  C:00AEH         LINE#         30
+  C:00B1H         LINE#         31
+  C:00B3H         LINE#         32
+  C:00BEH         LINE#         34
+  C:00C0H         LINE#         35
+  -------         ENDPROC       _UART_TXSTRING
+  -------         PROC          MAIN
+  C:0100H         LINE#         36
+  C:0100H         LINE#         38
+  C:0103H         LINE#         40
+  C:010CH         LINE#         42
+  C:010CH         LINE#         44
+  C:010EH         LINE#         45
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?CLDPTR
+  C:00C1H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+Program Size: data=28.0 xdata=0 code=275
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
